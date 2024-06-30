@@ -1,5 +1,10 @@
 # Fake Store API with Paging 3 in Compose (MVVM & Hilt)
 This is an Android application that demonstrates the use of Jetpack Compose with Paging3 library to fetch and display products from the Fake Store API. The project follows the MVVM (Model-View-ViewModel) design pattern and Dependency Injection (Hilt).
+
+## Platiz Fake Store API
+- https://fakeapi.platzi.com
+
+
 ## Features
 - Fetches products from the Fake Store API
 - Uses Paging3 library to handle pagination
