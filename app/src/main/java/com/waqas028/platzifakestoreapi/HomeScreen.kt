@@ -26,6 +26,7 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -58,7 +59,12 @@ import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun HomeScreen(homeViewModel: HomeViewModel = hiltViewModel()) {
-    val productsList = homeViewModel.getProducts().collectAsLazyPagingItems()
+    val productsList = homeViewModel.getProducts.collectAsLazyPagingItems()
+
+    LaunchedEffect(Unit) {
+        homeViewModel.getProducts()
+    }
+
     HomeScreen(productsList)
 }
 
@@ -114,12 +120,12 @@ private fun ProductCard(modifier: Modifier, product: Product) {
         AsyncImage(
             model = product.images.getOrNull(0),
             contentDescription = "",
-            placeholder = painterResource(id = R.drawable.ic_placeholder),
-            error = painterResource(id = R.drawable.ic_placeholder),
+            placeholder = painterResource(id = R.drawable.ic_store_placeholder),
+            error = painterResource(id = R.drawable.ic_store_placeholder),
             contentScale = ContentScale.FillBounds,
             modifier = Modifier
                 .padding(5.dp)
-                .heightIn(min = 200.dp)
+                //.heightIn(min = 200.dp)
                 .clip(RoundedCornerShape(12.dp))
                 .align(Alignment.CenterHorizontally)
         )
@@ -138,7 +144,9 @@ private fun ProductCard(modifier: Modifier, product: Product) {
             maxLines = 2,
             lineHeight = 20.sp,
             overflow = TextOverflow.Ellipsis,
-            modifier = Modifier.heightIn(min = 70.dp).padding(horizontal = 10.dp, vertical = 10.dp)
+            modifier = Modifier
+                .heightIn(min = 70.dp)
+                .padding(horizontal = 10.dp, vertical = 10.dp)
         )
     }
 }
